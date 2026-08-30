@@ -21,18 +21,33 @@ def build(output: Path) -> None:
     env = Environment(loader=FileSystemLoader(ROOT / 'mentoring/web/templates'), autoescape=select_autoescape())
     html = env.get_template('index.html').render()
     html = html.replace('/static/', './pages-assets/')
-    html = html.replace('<title>Mentoring CRM Dashboard</title>', '<title>Mentoring CRM · 화면 데모</title>')
+    html = html.replace('<title>Mentoring CRM Dashboard</title>', '<title>Mentoring CRM</title>')
     html = html.replace('<head>', '''<head>
     <meta http-equiv="Content-Security-Policy" content="connect-src 'none'; form-action 'none'; object-src 'none'; base-uri 'self'">
     <meta name="referrer" content="no-referrer">
     <script src="./pages-assets/docs-data.js"></script>
     <script src="./pages-assets/demo.js"></script>''', 1)
-    html = html.replace('<body>', '''<body>
-    <aside id="pages-demo-banner" role="note" style="position:relative;z-index:100;padding:14px 24px;background:#fff1c2;color:#382900;text-align:center;font:14px/1.6 sans-serif">
-        <strong>화면 체험용 데모</strong> · AI / Gmail / Notion 연동 없음<br>
-        입력은 이 탭에만 임시 보관되며 새로고침하면 초기화됩니다. 실제 학생·업무·인증 정보는 입력하지 마세요.
-        실행 버튼은 입력 내용과 무관한 가상 예시를 보여줍니다.
-    </aside>''', 1)
+    # Keep navigation and connection status in separate normal-flow rows.
+    html = html.replace('</head>', '''<style>
+        .top-nav { position:relative; inset:auto; flex-wrap:wrap; gap:16px;
+            background:#111; border-bottom:1px solid #292929; padding:20px 30px; }
+        .top-nav .top-link { color:#f5f5f5; }
+        #pages-demo-banner { padding:12px 24px; background:#191919; color:#c9c9c9;
+            text-align:center; font:13px/1.7 sans-serif; border-bottom:1px solid #292929; }
+        #pages-demo-banner strong { color:#f1c777; }
+        @media(max-width:480px) {
+            .top-nav { padding:16px; gap:12px; }
+            .nav-left { gap:16px; }
+            .profile-pic { height:20px; }
+            #pages-demo-banner { padding:12px 16px; text-align:left; }
+        }
+    </style></head>''', 1)
+    html = html.replace('    <main>', '''
+    <aside id="pages-demo-banner" role="note">
+        <strong>외부 서비스 미연결</strong> · AI / Gmail / Notion 연결 전입니다.<br>
+        현재 실행 버튼은 가상 예시를 표시하고, 입력은 새로고침하면 초기화됩니다. 실제 학생·업무·API 정보는 입력하지 마세요.
+    </aside>
+    <main>''', 1)
     start = html.index('            <div class="context-notice">')
     end = html.index('            <label class="context-check">', start)
     html = html[:start] + '''            <div class="context-notice">
