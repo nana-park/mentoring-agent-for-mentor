@@ -849,12 +849,12 @@
                 <p>이 화면의 입력·저장은 현재 탭의 메모리에서만 동작합니다. 새로고침하면 모두 초기화됩니다.
                 AI 분석·ChatGPT 기록 연동·파일 저장·Notion 전송은 실행하지 않습니다. 민감한 정보는 입력하지 마세요.</p>
             </div>
-            <label class="context-check"><input type="checkbox" id="context-enabled"> 미리보기에 선택한 업무 맥락을 포함합니다 (전송 없음)</label>
-            <div class="context-actions">
-                <button type="button" id="context-reload">저장본 다시 불러오기</button>
-                <button type="button" id="context-delete">임시 맥락 삭제</button>
+            <label class="context-check"><input type="checkbox" id="context-enabled"> 검토한 서비스·메모를 아래 요약에 표시</label>
+            <p class="context-selection-help">각 서비스·메모의 검토 완료 항목만 표시합니다. 체크 후 아래 ‘맥락 저장’을 누르세요. 현재 웹에서는 AI에 보내지 않습니다.</p><div class="context-actions">
+                <button type="button" id="context-reload">마지막 저장 상태로 되돌리기</button>
+                <button type="button" id="context-delete">입력 내용 지우기</button>
             </div>
-            <details><summary>이 탭의 임시 저장본 미리보기 (전송 없음)</summary><pre id="context-preview">사용 꺼짐 — 전달하지 않음</pre></details>
+            <details class="context-preview-section"><summary>선택한 내용 확인</summary><pre id="context-preview">사용 꺼짐 — 전달하지 않음</pre></details>
             <div class="context-output-guide">
                 <h4>인사이트는 이렇게 쌓입니다</h4>
                 <p>대화의 실제 근거 → 멘토에게 유용한 발견 → 적용 서비스와 이유 → 작은 실험 → 판단 기준 → 조건·한계</p>

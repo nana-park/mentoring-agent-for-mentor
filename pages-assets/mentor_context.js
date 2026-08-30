@@ -66,8 +66,15 @@
         byId('context-services').replaceChildren(); byId('context-notes').replaceChildren();
         data.services.forEach(item => addCard('service', item, false));
         data.notes.forEach(item => addCard('note', item, false));
-        byId('context-preview').textContent = Object.keys(response.preview).length
-            ? JSON.stringify(response.preview, null, 2) : '사용 꺼짐 — 업무 맥락을 전달하지 않음';
+        const preview = response.preview;
+        byId('context-preview').textContent = Object.keys(preview).length ? [
+            `내 역할: ${preview.role || '미입력'}`,
+            `업무 목표: ${preview.goals || '미입력'}`,
+            '', '검토한 서비스',
+            ...(preview.services.length ? preview.services.map(item => `• ${item.name}\n${item.details}`) : ['선택한 서비스 없음']),
+            '', '검토한 업무 메모',
+            ...(preview.notes.length ? preview.notes.map(item => `• ${item.title}\n${item.source}\n${item.text}`) : ['선택한 메모 없음'])
+        ].join('\n') : '표시가 꺼져 있습니다. 위 항목을 체크하고 ‘맥락 저장’을 누르면 선택한 내용을 확인할 수 있습니다.';
         loaded = true; dirty = false;
     }
     async function request(method = 'GET', data) {
@@ -100,7 +107,7 @@
     });
     byId('context-delete').addEventListener('click', async () => {
         if (!window.confirm('이 탭에 임시 저장한 맥락을 삭제할까요?')) return;
-        try { render(await request('DELETE', {revision})); status('이 탭의 임시 맥락을 삭제했습니다.'); }
+        try { render(await request('DELETE', {revision})); status('입력 내용을 지웠습니다.'); }
         catch (e) { status(e.message, true); }
     });
     byId('context-reload').addEventListener('click', () => load(true));

@@ -66,8 +66,15 @@
         byId('context-services').replaceChildren(); byId('context-notes').replaceChildren();
         data.services.forEach(item => addCard('service', item, false));
         data.notes.forEach(item => addCard('note', item, false));
-        byId('context-preview').textContent = Object.keys(response.preview).length
-            ? JSON.stringify(response.preview, null, 2) : '사용 꺼짐 — 업무 맥락을 전달하지 않음';
+        const preview = response.preview;
+        byId('context-preview').textContent = Object.keys(preview).length ? [
+            `내 역할: ${preview.role || '미입력'}`,
+            `업무 목표: ${preview.goals || '미입력'}`,
+            '', '검토한 서비스',
+            ...(preview.services.length ? preview.services.map(item => `• ${item.name}\n${item.details}`) : ['선택한 서비스 없음']),
+            '', '검토한 업무 메모',
+            ...(preview.notes.length ? preview.notes.map(item => `• ${item.title}\n${item.source}\n${item.text}`) : ['선택한 메모 없음'])
+        ].join('\n') : '사용 꺼짐 — 업무 맥락을 전달하지 않음';
         loaded = true; dirty = false;
     }
     async function request(method = 'GET', data) {

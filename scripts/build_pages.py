@@ -56,9 +56,10 @@ def build(output: Path) -> None:
             </div>
 ''' + html[end:]
     for old, new in {
-        '위 전송 범위를 확인했고, 저장한 업무 맥락을 분석에 사용합니다': '미리보기에 선택한 업무 맥락을 포함합니다 (전송 없음)',
-        '로컬 맥락 삭제': '임시 맥락 삭제',
-        '다음 분석에 전달할 저장본 미리보기': '이 탭의 임시 저장본 미리보기 (전송 없음)',
+        '위 전송 범위를 확인했고, 저장한 업무 맥락을 분석에 사용합니다': '검토한 서비스·메모를 아래 요약에 표시',
+        '로컬 맥락 삭제': '입력 내용 지우기',
+        '저장본 다시 불러오기': '마지막 저장 상태로 되돌리기',
+        '다음 분석에 전달할 저장본 미리보기': '선택한 내용 확인',
         '실제 서비스명과 사용자·AI 기능·단계·문제·제약을 적어야 구체적으로 제안할 수 있어요.': '서비스명과 사용자·AI 기능·해결할 문제를 정리하세요. 민감한 정보는 제외해주세요.',
         'Scans Gmail and processes newly received Google Meet meeting notes.': 'Gmail의 멘토링 메일과 Google Meet 회의록 자동 수집',
         'Batch processes text files saved in the local folder.': '폴더에 모아둔 회의록 텍스트 파일 일괄 처리',
@@ -75,6 +76,7 @@ def build(output: Path) -> None:
         '모든 작업이 완료': '예시 확인이 완료',
     }.items():
         html = html.replace(old, new)
+    html = html.replace('<div class="context-actions">', '<p class="context-selection-help">각 서비스·메모의 검토 완료 항목만 표시합니다. 체크 후 아래 ‘맥락 저장’을 누르세요. 현재 웹에서는 AI에 보내지 않습니다.</p><div class="context-actions">')
     html = '\n'.join(line.rstrip() for line in html.splitlines()) + '\n'
     (output / 'index.html').write_text(html, encoding='utf-8')
     (output / '.nojekyll').write_text('', encoding='utf-8')
@@ -86,7 +88,8 @@ def build(output: Path) -> None:
                 '이 탭에 임시 저장했습니다. 새로고침하면 초기화되며 AI는 호출하지 않습니다.'
             ).replace('이 PC에 저장한 업무 맥락 전체를 삭제할까요? 이미 Notion에 저장한 인사이트는 남습니다.',
                       '이 탭에 임시 저장한 맥락을 삭제할까요?').replace(
-                '로컬 업무 맥락을 삭제했습니다.', '이 탭의 임시 맥락을 삭제했습니다.').encode('utf-8')
+                '로컬 업무 맥락을 삭제했습니다.', '입력 내용을 지웠습니다.').replace(
+                '사용 꺼짐 — 업무 맥락을 전달하지 않음', '표시가 꺼져 있습니다. 위 항목을 체크하고 ‘맥락 저장’을 누르면 선택한 내용을 확인할 수 있습니다.').encode('utf-8')
         destination = assets / name
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(content)
