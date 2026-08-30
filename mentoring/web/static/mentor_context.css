@@ -99,8 +99,8 @@
 #context-view #context-status.error { color:#ffb8ac; }
 @media(max-width:600px) { #context-view { width:100vw; border-left:0; } .context-drawer-body { padding:16px; } .context-drawer-header, .context-drawer-footer { padding:16px; } .context-footer-buttons button { flex:1; } }
 @media(prefers-reduced-motion:reduce) { #context-view { transition:none; } }
-#context-view .context-actions { justify-content:flex-start; gap:12px; margin:20px 0; }
-#context-view .context-preview-section { margin-top:20px; padding-top:16px; border-top:1px solid #333; }
-#context-view .context-preview-section > summary { padding:8px 0; line-height:1.5; }
+#context-view .context-actions { justify-content:flex-start; gap:12px; margin:16px 0 0; }
+#context-view .context-preview-section { margin-top:12px; padding-top:0; border-top:0; }
+#context-view .context-preview-section > summary { padding:4px 0; line-height:1.5; }
 #context-view #context-preview { margin-top:12px; padding:16px; border-radius:8px; background:#111; line-height:1.6; font-family:inherit; }
 #context-view .context-selection-help { margin-top:12px; font-size:12px; }
