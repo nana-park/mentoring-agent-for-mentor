@@ -52,6 +52,12 @@ def build(output: Path) -> None:
         'Paste text directly to instantly call Gemini and save to DB without creating local files.': '가상의 텍스트로 입력 흐름을 체험합니다. AI 호출·DB 저장 없이 고정 예시를 표시합니다.',
         'Collect mentor insights to generate practical planning retrospectives.': '멘토 업무 적용 가설과 작은 실험의 고정 예시를 봅니다. 실제 회고록은 생성하지 않습니다.',
         'System architecture and database schema guides.': '아래 문서·다이어그램은 실제 로컬 앱의 구조입니다. 공개 데모는 외부 서비스에 연결하지 않습니다.',
+        'Extracts student count and names<br>to prevent incorrect or duplicate database entries.': '가상의 학생 예시를 표시합니다.<br>입력 내용을 AI로 분석하지 않습니다.',
+        'Review the extracted information<br>and permanently save to the database.': '가상 예시를 검토하고 실행 흐름을 체험합니다.<br>데이터베이스에는 저장하지 않습니다.',
+        'Execute & Save to Notion (Step 2)': '데모 결과 보기 (Notion 저장 없음)',
+        'Analyze Students (Step 1)': '학생 예시 보기 (분석 없음)',
+        'Direct Entry Successful': 'Direct Entry 데모 완료',
+        '${type} successful': '${type} 데모 완료',
         'id="auto-toggle"': 'id="auto-toggle" disabled title="예약 실행은 로컬 앱에서 사용할 수 있습니다"',
         '모든 작업이 완료': '데모 체험이 완료',
     }.items():
