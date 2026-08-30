@@ -578,10 +578,10 @@
                             <line x1="3" y1="10" x2="21" y2="10"></line>
                             <circle cx="12" cy="16" r="2"></circle>
                         </svg>
-                        Scheduled Automation · 데모에서는 실행되지 않음
+                        Scheduled Automation
                     </div>
                     <label class="switch">
-                        <input type="checkbox" id="auto-toggle" disabled title="예약 실행은 로컬 앱에서 사용할 수 있습니다" onchange="toggleAutoConfig()">
+                        <input type="checkbox" id="auto-toggle" onchange="toggleAutoConfig()">
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -601,7 +601,7 @@
                     </select>
                     <input type="text" class="config-time" id="auto-time" value="09:00" placeholder="HH:MM" maxlength="5" style="width: 70px; text-align: center;">
                     <button class="btn-save-config" onclick="saveAutoConfig()">Save Schedule</button>
-                    <span id="auto-status" style="font-size: 13px; color: #81c784; margin-left: 8px; opacity: 0; transition: opacity 0.3s;">Saved!</span>
+                    <span id="auto-status" style="font-size: 13px; color: #81c784; margin-left: 8px; opacity: 0; transition: opacity 0.3s;">이 탭에 임시 저장됨</span>
                 </div>
             </div>
 

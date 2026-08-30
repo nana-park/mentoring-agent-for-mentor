@@ -60,7 +60,6 @@ def build(output: Path) -> None:
         '로컬 맥락 삭제': '임시 맥락 삭제',
         '다음 분석에 전달할 저장본 미리보기': '이 탭의 임시 저장본 미리보기 (전송 없음)',
         '실제 서비스명과 사용자·AI 기능·단계·문제·제약을 적어야 구체적으로 제안할 수 있어요.': '데모에서는 가상의 서비스명과 사용자·AI 기능·문제를 적어주세요.',
-        'Scheduled Automation': 'Scheduled Automation · 데모에서는 실행되지 않음',
         'Scans Gmail and processes newly received Google Meet meeting notes.': '메일 자동 수집 화면을 체험합니다. 실제 Gmail은 조회하지 않습니다.',
         'Batch processes text files saved in the local folder.': '일괄 처리 예시를 봅니다. PC의 파일은 읽지 않습니다.',
         'Paste text directly to instantly call Gemini and save to DB without creating local files.': '가상의 텍스트로 입력 흐름을 체험합니다. AI 호출·DB 저장 없이 고정 예시를 표시합니다.',
@@ -72,7 +71,7 @@ def build(output: Path) -> None:
         'Analyze Students (Step 1)': '학생 예시 보기 (분석 없음)',
         'Direct Entry Successful': 'Direct Entry 데모 완료',
         '${type} successful': '${type} 데모 완료',
-        'id="auto-toggle"': 'id="auto-toggle" disabled title="예약 실행은 로컬 앱에서 사용할 수 있습니다"',
+        'Saved!': '이 탭에 임시 저장됨',
         '모든 작업이 완료': '데모 체험이 완료',
     }.items():
         html = html.replace(old, new)

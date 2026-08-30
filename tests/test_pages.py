@@ -25,7 +25,7 @@ class PagesExportTests(unittest.TestCase):
             self.assertIn('pages-demo-banner', html)
             self.assertNotIn('저장은 이 PC의 로컬 파일에만 합니다', html)
             self.assertLess(html.index('pages-assets/demo.js'), html.index('fetch('))
-            self.assertIn('id="auto-toggle" disabled', html)
+            self.assertNotIn('id="auto-toggle" disabled', html)
             # Same sources must generate byte-identical checked-in artifacts.
             for name in names:
                 self.assertEqual((output / name).read_bytes(), (ROOT / name).read_bytes(), name)

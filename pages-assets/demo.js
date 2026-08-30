@@ -4,6 +4,7 @@
     let version = 0;
     const empty = () => ({revision: String(++version), enabled: false, role: '', goals: '', services: [], notes: []});
     let context = empty();
+    let automation = {enabled: false, frequency: 'daily', day: 'Monday', time: '09:00'};
     const json = (body, status = 200) => new Response(JSON.stringify(body), {
         status, headers: {'Content-Type': 'application/json'}
     });
@@ -38,7 +39,15 @@
         if (path === '/api/history') return json({success: true, data: [
             {title: '[데모] 멘토 업무 인사이트 예시', type: 'Demo', status: 'Success', date: '2026-01-01T09:00:00'}
         ]});
-        if (path === '/api/automation') return json({success: true, config: {enabled: false, frequency: 'daily', day: 'Monday', time: '09:00'}});
+        if (path === '/api/automation') {
+            if (method === 'POST') {
+                const data = JSON.parse(options.body || '{}');
+                automation = {enabled: Boolean(data.enabled), frequency: data.frequency,
+                    day: data.day, time: data.time};
+            } else if (method !== 'GET') return json({success: false}, 405);
+            // UI preference only; no timers, jobs, or external calls are created.
+            return json({success: true, config: automation});
+        }
         if (path === '/api/run/direct/analyze') return json({success: true, students: [{name: '[데모] 학생 A', content: sample}]});
         if (/^\/api\/stop\/(auto|batch|summarize|direct)$/.test(path)) return json({success: true});
         if (/^\/api\/run\/(auto|batch|summarize|direct)$/.test(path)) {
