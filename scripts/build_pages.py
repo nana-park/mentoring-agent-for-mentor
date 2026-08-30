@@ -42,12 +42,11 @@ def build(output: Path) -> None:
             #pages-demo-banner { padding:12px 16px; text-align:left; }
         }
     </style></head>''', 1)
-    html = html.replace('    <main>', '''
+    html = html.replace('<body>', '''<body>
     <aside id="pages-demo-banner" role="note">
         <strong>외부 서비스 미연결</strong> · AI / Gmail / Notion 연결 전입니다.<br>
         현재 실행 버튼은 가상 예시를 표시하고, 입력은 새로고침하면 초기화됩니다. 실제 학생·업무·API 정보는 입력하지 마세요.
-    </aside>
-    <main>''', 1)
+    </aside>''', 1)
     start = html.index('            <div class="context-notice">')
     end = html.index('            <label class="context-check">', start)
     html = html[:start] + '''            <div class="context-notice">
