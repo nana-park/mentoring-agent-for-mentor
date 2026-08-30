@@ -1,0 +1,7 @@
+Property: 'Human Feedback' | Type: rich_text
+Property: 'Date' | Type: date
+Property: 'Resolved Studnet Name' | Type: rich_text
+Property: 'Error Fix Trial' | Type: checkbox
+Property: 'Error Reason' | Type: rich_text
+Property: 'Raw Email Text' | Type: rich_text
+Property: 'Mail Title' | Type: title

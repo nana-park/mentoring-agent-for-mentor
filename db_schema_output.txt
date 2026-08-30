@@ -1,0 +1,15 @@
+Finding DBs in Course Page 374c919e34d1808d9cb3f3031085e440
+Found DB: 🧑‍🎓 Students (학생 CRM) (374c919e-34d1-8061-864f-e9d3f7c7492d)
+Found DB: 💬 Mentoring Sessions (374c919e-34d1-8039-81dd-df4281beca76)
+Found DB: 📝 Assignments (374c919e-34d1-80b2-9383-e585f4be077b)
+Found DB: 🧠 Mentor Insights (374c919e-34d1-8022-bafb-fbbb39b73ca6)
+Found DB: 🚨 Review Queue (374c919e-34d1-80db-b9dd-e37bf1278402)
+Found DB: Ingestion History (374c919e-34d1-8023-bda8-cd2b61dd1d3b)
+
+Querying Mentoring Sessions DB schema: 374c919e-34d1-8039-81dd-df4281beca76
+Property: 'Meeting Summary' | Type: rich_text
+Property: 'Session Title' | Type: rich_text
+Property: 'Session Date' | Type: date
+Property: '🧑‍🎓 Students (학생 CRM)' | Type: relation
+Property: 'UniqueKey' | Type: title
+  -> THIS IS THE TITLE PROPERTY: 'UniqueKey'

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Back Folder -->
+  <path fill="#D29000" d="M52 14H28l-4-5H12c-3.3 0-6 2.7-6 6v14h52v-9c0-3.3-2.7-6-6-6z"/>
+  <!-- Front Folder -->
+  <path fill="#FBC02D" d="M52 20H12c-3.3 0-6 2.7-6 6v22c0 3.3 2.7 6 6 6h40c3.3 0 6-2.7 6-6V26c0-3.3-2.7-6-6-6z"/>
+  <!-- Blue U-Shape -->
+  <path fill="#1E88E5" d="M22 54v-16c0-2.2 1.8-4 4-4h12c2.2 0 4 1.8 4 4v16h-6V40h-8v14h-6z"/>
+</svg>

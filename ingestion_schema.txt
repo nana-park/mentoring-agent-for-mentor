@@ -1,0 +1,5 @@
+Property: 'Source ID' | Type: rich_text
+Property: 'Processed At' | Type: date
+Property: 'Type' | Type: select
+Property: 'Status' | Type: select
+Property: 'Source Title' | Type: title
