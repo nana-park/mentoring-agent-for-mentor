@@ -524,7 +524,6 @@
     <!-- Google Style Top Nav -->
     <div class="top-nav">
         <div class="nav-left">
-            <button class="top-link context-nav" onclick="switchView('context')">내 업무 맥락</button>
             <a class="top-link" onclick="switchView('history')">History</a>
             <a class="top-link" onclick="switchView('docs')">Docs</a>
         </div>
@@ -546,6 +545,7 @@
 
         <!-- Home View -->
         <div id="home-view" style="width: 100%; display: grid; gap: 32px;">
+            {% include 'personal_settings.html' %}
             
             <!-- Automation Section -->
             <div class="automation-container">

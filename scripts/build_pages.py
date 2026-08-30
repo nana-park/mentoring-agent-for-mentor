@@ -19,7 +19,7 @@ def build(output: Path) -> None:
     assets = output / 'pages-assets'
     assets.mkdir(exist_ok=True)
     env = Environment(loader=FileSystemLoader(ROOT / 'mentoring/web/templates'), autoescape=select_autoescape())
-    html = env.get_template('index.html').render()
+    html = env.get_template('index.html').render(pages_demo=True)
     html = html.replace('/static/', './pages-assets/')
     html = html.replace('<title>Mentoring CRM Dashboard</title>', '<title>Mentoring CRM</title>')
     html = html.replace('<head>', '''<head>
