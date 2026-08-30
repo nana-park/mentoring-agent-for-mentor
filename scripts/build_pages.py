@@ -44,8 +44,7 @@ def build(output: Path) -> None:
     </style></head>''', 1)
     html = html.replace('<body>', '''<body>
     <aside id="pages-demo-banner" role="note">
-        <strong>외부 서비스 미연결</strong> · AI / Gmail / Notion 연결 전입니다.<br>
-        웹 버전은 준비 중입니다. 실제 작업은 로컬에서 실행해주세요. 입력은 새로고침하면 초기화됩니다. 실제 학생·업무·API 정보는 입력하지 마세요.
+        <strong>웹 버전은 준비 중입니다.</strong> 하단 WORKSPACE SETTING에서 개인 설정을 확인해주세요.
     </aside>''', 1)
     start = html.index('            <div class="context-notice">')
     end = html.index('            <label class="context-check">', start)
