@@ -7,7 +7,6 @@
     <div class="settings-heading">
         <div>
             <h3 id="personal-settings-title">개인 설정</h3>
-            <p>분석에 사용할 AI, 연결 계정, 내 업무 맥락을 한곳에서 관리합니다.</p>
         </div>
         <span class="settings-status">{% if pages_demo %}계정 연결 전{% else %}로컬 설정 사용{% endif %}</span>
     </div>
@@ -47,7 +46,7 @@
             </details>
         </article>
         <article class="settings-card settings-context">
-            <div class="settings-card-title"><h4>내 업무 맥락</h4><span class="settings-status">{% if pages_demo %}임시 입력{% else %}로컬 저장{% endif %}</span></div>
+            <div class="settings-card-title"><h4>내 업무 맥락</h4><span class="settings-status">{% if pages_demo %}미설정{% else %}로컬 저장{% endif %}</span></div>
             <p class="settings-value">역할 · 담당 서비스 · 업무 메모</p>
             <p>검토한 맥락을 바탕으로 서비스 적용 아이디어 만들기</p>
             <button type="button" class="settings-context-button" onclick="switchView('context')">내 업무 맥락 설정</button>
