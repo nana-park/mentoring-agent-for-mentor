@@ -963,7 +963,8 @@
         }
 
         function switchView(view) {
-            const views = ['home', 'history', 'docs', 'context'];
+            if (view === 'context') { window.mentorContextUI.open(); return; }
+            const views = ['home', 'history', 'docs'];
             views.forEach(v => {
                 document.getElementById(v + '-view').style.display = (v === view) ? (v==='home'?'grid':'block') : 'none';
             });
@@ -971,7 +972,6 @@
             const t = document.getElementById('page-title');
             const d = document.getElementById('page-desc');
             if (view === 'home') { t.textContent = "학생별 기록부터 멘토의 업무 인사이트까지"; d.textContent = "멘토링 대화를 정리하고, 내 업무 맥락과 연결해 서비스에 적용할 아이디어를 발견하세요."; }
-            else if (view === 'context') { t.textContent = '내 업무 맥락'; d.textContent = '대화의 발견을 내 AI 서비스의 다음 실험으로 연결합니다.'; window.mentorContextUI.load(); }
             else if (view === 'history') { t.textContent = "Execution History"; d.textContent = "Recent results from the pipeline scans."; fetchHistory(); }
             else if (view === 'docs') { t.textContent = "Documentation"; d.textContent = "System architecture and database schema guides."; loadDoc('architecture_diagram.md', document.getElementById('btn-doc-arch')); }
         }

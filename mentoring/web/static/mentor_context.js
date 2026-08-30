@@ -2,7 +2,7 @@
 (() => {
     'use strict';
     const byId = id => document.getElementById(id);
-    let revision = '', loaded = false, dirty = false;
+    let revision = '', loaded = false, dirty = false, savedResponse = null;
     const status = (message, error = false) => {
         byId('context-status').textContent = message;
         byId('context-status').classList.toggle('error', error);
@@ -57,6 +57,7 @@
         });
     }
     function render(response) {
+        savedResponse = response;
         const data = response.data;
         revision = data.revision;
         byId('context-role').value = data.role;
@@ -130,5 +131,40 @@
         }
     });
     window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
-    window.mentorContextUI = {load};
+    const drawer = byId('context-view');
+    let opener = null, closing = false, previousOverflow = '';
+    function open() {
+        if (drawer.open || closing) return;
+        opener = document.activeElement;
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        drawer.showModal();
+        requestAnimationFrame(() => drawer.classList.add('is-open'));
+        load();
+    }
+    function close() {
+        if (closing || !drawer.open) return;
+        if (byId('context-save').disabled) { status('저장 중입니다. 잠시 기다려주세요.'); return; }
+        if (dirty) {
+            if (!window.confirm('저장하지 않은 변경을 버리고 닫을까요?')) return;
+            if (savedResponse) render(savedResponse);
+            dirty = false;
+        }
+        closing = true;
+        drawer.classList.remove('is-open');
+        const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 200;
+        window.setTimeout(() => { drawer.close(); closing = false; }, delay);
+    }
+    drawer.addEventListener('cancel', event => { event.preventDefault(); close(); });
+    drawer.addEventListener('click', event => {
+        const rect = drawer.getBoundingClientRect();
+        if (event.target === drawer && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) close();
+    });
+    drawer.addEventListener('close', () => {
+        document.body.style.overflow = previousOverflow;
+        if (opener && opener.isConnected) opener.focus({preventScroll: true});
+    });
+    byId('context-close').addEventListener('click', close);
+    byId('context-close-top').addEventListener('click', close);
+    window.mentorContextUI = {load, open, close};
 })();
