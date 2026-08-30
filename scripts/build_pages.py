@@ -45,7 +45,7 @@ def build(output: Path) -> None:
     html = html.replace('<body>', '''<body>
     <aside id="pages-demo-banner" role="note">
         <strong>외부 서비스 미연결</strong> · AI / Gmail / Notion 연결 전입니다.<br>
-        현재 실행 버튼은 가상 예시를 표시하고, 입력은 새로고침하면 초기화됩니다. 실제 학생·업무·API 정보는 입력하지 마세요.
+        웹 버전은 준비 중입니다. 실제 작업은 로컬에서 실행해주세요. 입력은 새로고침하면 초기화됩니다. 실제 학생·업무·API 정보는 입력하지 마세요.
     </aside>''', 1)
     start = html.index('            <div class="context-notice">')
     end = html.index('            <label class="context-check">', start)
@@ -66,10 +66,10 @@ def build(output: Path) -> None:
         'Paste text directly to instantly call Gemini and save to DB without creating local files.': '회의록을 직접 입력하고 학생별 내용을 검토하는 작업 공간',
         'Collect mentor insights to generate practical planning retrospectives.': '멘토링에서 발견한 인사이트와 서비스 적용 아이디어 정리',
         'System architecture and database schema guides.': '아래 문서·다이어그램은 실제 로컬 앱의 구조입니다. 현재 공개 화면은 외부 서비스에 연결하지 않습니다.',
-        'Extracts student count and names<br>to prevent incorrect or duplicate database entries.': '가상의 학생 예시를 표시합니다.<br>입력 내용을 AI로 분석하지 않습니다.',
-        'Review the extracted information<br>and permanently save to the database.': '학생별 내용을 검토합니다.<br>외부 서비스 연결 전에는 예시 결과만 표시합니다.',
+        'Extracts student count and names<br>to prevent incorrect or duplicate database entries.': '입력한 회의록을 학생별로 정리합니다.<br>분석 기능은 웹 버전에서 준비 중입니다.',
+        'Review the extracted information<br>and permanently save to the database.': '학생별 내용을 검토합니다.<br>실제 저장은 로컬 앱에서 실행해주세요.',
         'Execute & Save to Notion (Step 2)': '결과 보기',
-        'Analyze Students (Step 1)': '학생 예시 보기 (분석 없음)',
+        'Analyze Students (Step 1)': '학생별 내용 분석',
         'Direct Entry Successful': '입력 예시 확인 완료',
         '${type} successful': '${type} 예시 확인 완료',
         'Saved!': '이 탭에 임시 저장됨',
@@ -77,6 +77,21 @@ def build(output: Path) -> None:
     }.items():
         html = html.replace(old, new)
     html = html.replace('<div class="context-actions">', '<p class="context-selection-help">각 서비스·메모의 검토 완료 항목만 표시합니다. 체크 후 아래 ‘맥락 저장’을 누르세요. 현재 웹에서는 AI에 보내지 않습니다.</p><div class="context-actions">')
+    html = html.replace('</body>', '''<dialog id="web-unavailable" aria-labelledby="web-unavailable-title" style="margin:auto;max-width:420px;width:calc(100% - 32px);padding:24px;background:#181818;color:#eee;border:1px solid #444;border-radius:12px">
+        <h2 id="web-unavailable-title" style="font-size:18px;margin-bottom:12px">웹 버전은 준비 중입니다</h2>
+        <p style="font-size:14px;line-height:1.6;margin-bottom:20px">실제 분석과 기록은 로컬 앱에서 실행해주세요. 현재 화면에서는 작업을 실행하거나 결과를 생성하지 않습니다.</p>
+        <form method="dialog"><button type="button" class="run-btn" autofocus onclick="document.getElementById('web-unavailable').close()">확인</button></form>
+    </dialog>
+    <script>
+        (() => {
+            const notice = document.getElementById('web-unavailable');
+            const explainAvailability = () => { if (!notice.open) notice.showModal(); };
+            runScript = explainAvailability;
+            analyzeDirectEntry = explainAvailability;
+            executeDirectEntry = explainAvailability;
+        })();
+    </script>
+    </body>''', 1)
     html = '\n'.join(line.rstrip() for line in html.splitlines()) + '\n'
     (output / 'index.html').write_text(html, encoding='utf-8')
     (output / '.nojekyll').write_text('', encoding='utf-8')
