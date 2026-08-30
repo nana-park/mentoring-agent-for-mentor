@@ -3,6 +3,8 @@
 ```text
 mentoring-agent-for-mentor/
 ├─ README.md
+├─ index.html / .nojekyll              # GitHub Pages 데모 (생성 파일)
+├─ pages-assets/                      # 데모 공개 에셋 (생성 파일)
 ├─ requirements.txt
 ├─ .env.example
 ├─ app.py / main.py                   # 기존 실행 명령 호환
@@ -23,6 +25,8 @@ mentoring-agent-for-mentor/
 │     ├─ templates/
 │     └─ static/
 ├─ scripts/
+│  ├─ build_pages.py                  # 공개 파일만 정적 데모로 내보내기
+│  ├─ pages_demo.js                   # 외부 호출 없는 데모 동작
 │  ├─ diagnostics/                    # 조회·진단
 │  └─ maintenance/                    # 실제 데이터 수정
 ├─ tests/                            # 외부 API 없는 검증

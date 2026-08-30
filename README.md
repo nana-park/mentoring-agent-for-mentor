@@ -1,5 +1,15 @@
 # Mentoring Agent for Mentor
 
+**[GitHub Pages에서 화면 체험하기](https://nana-park.github.io/mentoring-agent-for-mentor/)**
+
+공개 페이지는 가상 예시로 동작하는 **정적 데모**입니다. AI 분석·Gmail 조회·Notion 기록·예약 실행은 하지 않습니다.
+입력은 현재 탭의 메모리에만 보관되고 새로고침하면 초기화됩니다. 실제 학생 정보·업무 기밀·인증정보는 입력하지 마세요.
+실제 업무 처리는 아래 설치 방법으로 로컬 Flask 앱을 실행해야 합니다.
+
+화면·문서 수정 후 `python scripts/build_pages.py`를 실행하고 `index.html`, `.nojekyll`, `pages-assets/`도 함께 커밋하세요.
+Pages 게시 설정은 `main` 브랜치의 `/(root)`입니다. 빌더는 공개 템플릿·지정한 정적 파일·문서만 읽으며 인증·업무 파일은 읽거나 복사하지 않습니다.
+데모 전용 동작은 `scripts/pages_demo.js`, 원본 업무 화면은 `mentoring/web/`에서 관리합니다.
+
 멘토링 회의록을 Gemini로 분석하고 학생별 Notion CRM에 기록하는 로컬 웹 도구입니다.
 Gmail의 Google Docs 링크, 로컬 텍스트 파일, 웹 직접 입력을 지원합니다.
 학생 CRM 관리와 함께, 대화에서 멘토 본인의 AI 서비스 기획 업무에 유용한 발견·적용 가설을 추출합니다.
