@@ -71,7 +71,7 @@ class StructureTests(unittest.TestCase):
                 response = client.get('/static/' + path.relative_to(config.WEB_DIR / 'static').as_posix())
                 self.assertEqual(response.status_code, 200)
                 response.close()
-        for filename in ['architecture_diagram.md', 'database_schema.md', 'project_structure.md']:
+        for filename in ['architecture_diagram.md', 'database_schema.md', 'project_structure.md', 'mentor_insights.md']:
             data = client.get('/api/docs/' + filename).get_json()
             self.assertTrue(data['success'])
             self.assertEqual(data['content'], (config.DOCS_DIR / filename).read_text(encoding='utf-8'))

@@ -15,6 +15,7 @@ ARCHIVE_DIR = PROJECT_ROOT / "archive"
 DOCS_DIR = PROJECT_ROOT / "docs"
 DIAGNOSTICS_DIR = PROJECT_ROOT / "runtime" / "diagnostics"
 WEB_DIR = PROJECT_ROOT / "mentoring" / "web"
+MENTOR_CONTEXT_FILE = PROJECT_ROOT / "runtime" / "mentor_context.json"
 
 
 def load_environment():

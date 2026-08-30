@@ -17,11 +17,12 @@ class NotionAPIClient:
     async def close(self):
         await self.client.aclose()
         
-    async def query_database(self, database_id: str, filter_payload: dict = None, sorts: list = None, page_size: int = 100):
+    async def query_database(self, database_id: str, filter_payload: dict = None, sorts: list = None, page_size: int = 100, start_cursor: str = None):
         payload = {}
         if filter_payload: payload["filter"] = filter_payload
         if sorts: payload["sorts"] = sorts
         payload["page_size"] = page_size
+        if start_cursor: payload["start_cursor"] = start_cursor
         
         response = await self.client.post(f"/databases/{database_id}/query", json=payload)
         response.raise_for_status()

@@ -1,0 +1,55 @@
+<section id="context-view" style="display:none" aria-label="멘토 업무 맥락">
+    <div class="context-grid">
+        <div class="context-panel">
+            <div class="context-kicker">MENTOR WORKSPACE</div>
+            <h3>어떤 서비스에 연결할까요?</h3>
+            <p>ChatGPT 로그인이나 전체 기록 동기화 없이, 필요한 맥락만 검토해서 등록합니다.</p>
+            <label class="context-field">내 역할
+                <input id="context-role" maxlength="300" placeholder="AI 서비스 기획자">
+            </label>
+            <label class="context-field">요즘 해결하려는 업무 문제·관심사
+                <textarea id="context-goals" maxlength="3000" rows="3" placeholder="현재 담당 업무, 개선하고 싶은 경험, 검증할 가설을 적어주세요."></textarea>
+            </label>
+            <div class="context-section-title"><h4>담당 서비스</h4><button type="button" id="context-add-service">서비스 추가</button></div>
+            <p class="context-hint">실제 서비스명과 사용자·AI 기능·단계·문제·제약을 적어야 구체적으로 제안할 수 있어요. 최대 8개.</p>
+            <div id="context-services"></div>
+            <div class="context-section-title"><h4>검토할 업무 메모</h4><button type="button" id="context-add-note">메모 추가</button></div>
+            <p class="context-hint">ChatGPT에서 정리한 맥락이나 직접 쓴 업무 메모. 최신 사실인지 확인한 항목만 분석 사용을 체크하세요. 최대 12개.</p>
+            <div id="context-notes"></div>
+        </div>
+        <aside class="context-panel context-guide">
+            <div class="context-kicker">CHATGPT → 검토 → 적용</div>
+            <h3>기존 GPT 맥락을 가져오는 방법</h3>
+            <ol>
+                <li>업무 이야기를 나눈 ChatGPT 대화를 엽니다.</li>
+                <li>아래 요청문으로 필요한 맥락을 요약합니다.</li>
+                <li>결과를 메모에 붙여넣고 틀리거나 민감한 내용을 지웁니다.</li>
+                <li>실제 서비스를 등록하고, 검토한 항목만 분석에 사용합니다.</li>
+            </ol>
+            <textarea id="context-chatgpt-prompt" rows="8" readonly aria-label="ChatGPT에 붙여넣을 요청문">현재 대화와 네가 실제로 참조할 수 있는 업무 맥락만 바탕으로, 나의 AI 서비스 기획 업무를 정리해줘. 역할, 담당 서비스별 사용자/문제/AI 기능/진행 단계, 목표, 제약, 아직 검증하지 않은 가설을 구분해줘. 과거와 현재가 다르면 표시하고, 모르는 서비스명이나 수치를 만들지 마. 내 발언과 네가 제안한 아이디어를 구분해줘. 고객 개인정보, 인증정보, 회사 기밀은 제외해줘. 다른 도구에 옮겨 검토할 수 있도록 간결한 마크다운으로 작성해줘.</textarea>
+            <button type="button" id="context-copy-prompt">요청문 복사</button>
+            <label class="context-file">텍스트 메모 가져오기 (.txt / .md)
+                <input type="file" id="context-import" accept=".txt,.md,text/plain,text/markdown">
+            </label>
+            <p class="context-hint">파일은 브라우저에서 읽어 미저장 메모로 추가합니다. ChatGPT 전체 내보내기 ZIP·JSON은 받지 않습니다.</p>
+            <div class="context-notice">
+                <strong>업무 맥락의 전송 범위</strong>
+                <p>저장은 이 PC의 로컬 파일에만 합니다. 아래 사용 설정을 켜면 다음 회의록 분석·회고록 생성 시 역할·목표와 체크한 항목이 <strong>Google Gemini API</strong>로 전달됩니다. 결과에는 서비스명·근거가 포함되어 <strong>Notion</strong>에 저장될 수 있습니다.</p>
+                <p>ChatGPT 기록·메모리는 자동으로 읽지 않습니다. 사용을 끄거나 삭제해도 이미 생성되어 Notion에 저장된 결과나 진행 중인 요청은 회수되지 않습니다.</p>
+            </div>
+            <label class="context-check"><input type="checkbox" id="context-enabled"> 위 전송 범위를 확인했고, 저장한 업무 맥락을 분석에 사용합니다</label>
+            <div class="context-actions">
+                <button type="button" id="context-save" class="context-primary">맥락 저장</button>
+                <button type="button" id="context-reload">저장본 다시 불러오기</button>
+                <button type="button" id="context-delete">로컬 맥락 삭제</button>
+            </div>
+            <p id="context-status" role="status" aria-live="polite"></p>
+            <details><summary>다음 분석에 전달할 저장본 미리보기</summary><pre id="context-preview">사용 꺼짐 — 전달하지 않음</pre></details>
+            <div class="context-output-guide">
+                <h4>인사이트는 이렇게 쌓입니다</h4>
+                <p>대화의 실제 근거 → 멘토에게 유용한 발견 → 적용 서비스와 이유 → 작은 실험 → 판단 기준 → 조건·한계</p>
+                <p>확인된 발견과 AI의 새 가설을 구분합니다. 실제 서비스가 없으면 일반 제안임을 표시합니다.</p>
+            </div>
+        </aside>
+    </div>
+</section>

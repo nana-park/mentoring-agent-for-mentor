@@ -2,9 +2,19 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Literal
 
 class MentorInsight(BaseModel):
-    insightTitle: str = Field(description="Title of the insight")
+    insightTitle: str = Field(max_length=160, description="Reusable discovery or application hypothesis for the mentor")
     insightType: Literal["기획 실무", "교육 개선", "학습 태도 및 동기", "취업 및 진로 고민"] = Field(description="Category of the insight")
-    description: List[str] = Field(description="Detailed explanation of the insight formatted as bullet points")
+    description: List[str] = Field(description="Why this is useful to the mentor's own work, not a student evaluation")
+    insightKind: Literal["대화 기반 발견", "업무 적용 가설"] = Field(default="대화 기반 발견")
+    evidenceQuotes: List[str] = Field(default_factory=list, max_length=3, description="Exact short quotes copied from the meeting transcript")
+    targetServiceId: str = Field(default="", max_length=80)
+    targetService: str = Field(default="", max_length=120, description="Server-populated service name; return empty")
+    contextRefs: List[str] = Field(default_factory=list, max_length=20)
+    applicability: str = Field(default="", max_length=2000)
+    nextExperiment: str = Field(default="", max_length=2000)
+    successCriterion: str = Field(default="", max_length=2000)
+    caveats: str = Field(default="", max_length=2000)
+    mentorContextVersion: str = Field(default="", max_length=64, description="Server-populated; return empty")
 
 class RoutingDecision(BaseModel):
     matchedCourse: str = Field(description="Matched Course ID or Name")

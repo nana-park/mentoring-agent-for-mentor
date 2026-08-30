@@ -12,9 +12,12 @@ from mentoring.services.llm_parser import LLMParser
 from mentoring.web.processes import active_processes, stream_subprocess, pipeline_command, summarize_command
 from mentoring.web.scheduler import load_config, save_config, scheduler_loop
 
+from mentoring.web.context_routes import context_routes
+
 load_environment()
 app = Flask(__name__, template_folder=str(WEB_DIR / "templates"),
             static_folder=str(WEB_DIR / "static"), static_url_path="/static")
+app.register_blueprint(context_routes)
 
 @app.route('/')
 def index():
@@ -146,7 +149,7 @@ def analyze_direct():
 
 @app.route('/api/docs/<filename>', methods=['GET'])
 def get_docs(filename):
-    if filename not in ["architecture_diagram.md", "database_schema.md", "project_structure.md"]:
+    if filename not in ["architecture_diagram.md", "database_schema.md", "project_structure.md", "mentor_insights.md"]:
         return jsonify({"success": False, "error": "허용되지 않은 파일입니다."})
 
     doc_path = DOCS_DIR / filename

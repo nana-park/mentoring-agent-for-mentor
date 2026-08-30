@@ -517,12 +517,14 @@
         }
         .zoom-btn:hover { background: rgba(255,255,255,0.2); }
     </style>
+<link rel="stylesheet" href="/static/mentor_context.css">
 </head>
 <body>
 
     <!-- Google Style Top Nav -->
     <div class="top-nav">
         <div class="nav-left">
+            <button class="top-link context-nav" onclick="switchView('context')">내 업무 맥락</button>
             <a class="top-link" onclick="switchView('history')">History</a>
             <a class="top-link" onclick="switchView('docs')">Docs</a>
         </div>
@@ -714,6 +716,7 @@
                 <div class="docs-nav">
                     <button class="docs-btn active" id="btn-doc-arch" onclick="loadDoc('architecture_diagram.md', this)">Architecture Diagram</button>
                     <button class="docs-btn" id="btn-doc-structure" onclick="loadDoc('project_structure.md', this)">Project Structure</button>
+                    <button class="docs-btn" id="btn-doc-insights" onclick="loadDoc('mentor_insights.md', this)">Mentor Insights Guide</button>
                     <button class="docs-btn" id="btn-doc-schema" onclick="loadDoc('database_schema.md', this)">Database Schema</button>
                 </div>
                 <div id="docs-content" class="markdown-body">
@@ -721,6 +724,7 @@
                 </div>
             </div>
         </div>
+        {% include 'mentor_context.html' %}
     </main>
 
     <div id="toast">
@@ -959,7 +963,7 @@
         }
 
         function switchView(view) {
-            const views = ['home', 'history', 'docs'];
+            const views = ['home', 'history', 'docs', 'context'];
             views.forEach(v => {
                 document.getElementById(v + '-view').style.display = (v === view) ? (v==='home'?'grid':'block') : 'none';
             });
@@ -967,6 +971,7 @@
             const t = document.getElementById('page-title');
             const d = document.getElementById('page-desc');
             if (view === 'home') { t.textContent = "Automated record-keeping workspace for mentors."; d.textContent = "Click on the mode you wish to execute."; }
+            else if (view === 'context') { t.textContent = '내 업무 맥락'; d.textContent = '대화의 발견을 내 AI 서비스의 다음 실험으로 연결합니다.'; window.mentorContextUI.load(); }
             else if (view === 'history') { t.textContent = "Execution History"; d.textContent = "Recent results from the pipeline scans."; fetchHistory(); }
             else if (view === 'docs') { t.textContent = "Documentation"; d.textContent = "System architecture and database schema guides."; loadDoc('architecture_diagram.md', document.getElementById('btn-doc-arch')); }
         }
@@ -1407,5 +1412,6 @@
 
         window.addEventListener('load', loadAutoConfig);
     </script>
+<script src="/static/mentor_context.js"></script>
 </body>
 </html>

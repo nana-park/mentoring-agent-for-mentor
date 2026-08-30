@@ -2,6 +2,7 @@ import json
 import re
 from mentoring.integrations.notion import NotionAPIClient
 from mentoring.models import ParsedMentoringSession
+from mentoring.services.mentor_insights import insight_summary, plain_rich_text
 
 def parse_markdown_to_rich_text(text: str):
     """
@@ -300,11 +301,11 @@ class NotionUpsertHandler:
 
     async def _insert_insights(self, db_id: str, insights: list, student_page_id: str, session_page_id: str):
         for insight in insights:
-            desc_str = "\n".join(f"- {d}" for d in insight.description)
+            desc_str = insight_summary(insight)
             properties = {
                 "Insight Title": {"title": [{"text": {"content": insight.insightTitle}}]},
                 "Insight Type": {"select": {"name": insight.insightType}},
-                "Summary": {"rich_text": [{"text": {"content": desc_str}}]},
+                "Summary": {"rich_text": plain_rich_text(desc_str)},
                 "🧑‍🎓 Students (학생 CRM)": {"relation": [{"id": student_page_id}]},
                 "💬 Mentoring Sessions": {"relation": [{"id": session_page_id}]}
             }

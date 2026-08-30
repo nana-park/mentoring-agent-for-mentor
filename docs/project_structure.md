@@ -19,6 +19,7 @@ mentoring-agent-for-mentor/
 │     ├─ app.py                       # HTTP 요청
 │     ├─ processes.py                 # 실행 명령·로그
 │     ├─ scheduler.py                 # 예약 설정·실행
+│     ├─ context_routes.py            # 로컬 업무 맥락 API
 │     ├─ templates/
 │     └─ static/
 ├─ scripts/
@@ -31,6 +32,7 @@ mentoring-agent-for-mentor/
 │  ├─ project_structure.md            # 이 문서: 파일 위치
 │  ├─ architecture_diagram.md         # 실행 흐름 구조도
 │  ├─ database_schema.md              # DB 필드·관계
+│  ├─ mentor_insights.md              # 업무 맥락·인사이트 사용 가이드
 │  ├─ known_limitations.md
 │  ├─ snapshots/                      # 과거 DB 진단 결과
 │  └─ archive/                        # 이전 구조 설명
@@ -39,7 +41,9 @@ mentoring-agent-for-mentor/
 ├─ db_config.json                    # 로컬 전용, 기존 위치 유지
 ├─ automation_config.json            # 로컬 전용, 기존 위치 유지
 ├─ inbox/ / archive/                 # 로컬 전용, 기존 위치 유지
-└─ runtime/diagnostics/               # 새 진단 출력, Git 제외
+└─ runtime/                          # 로컬 전용, Git 제외
+   ├─ diagnostics/                   # 새 진단 출력
+   └─ mentor_context.json            # 검토한 업무 맥락 (처음 저장할 때 생성)
 ```
 
 ## 경로를 안전하게 관리하는 방법
@@ -60,6 +64,15 @@ mentoring-agent-for-mentor/
 `.env`와 인증 파일은 이동하지 않았으며 내용도 변경하지 않았습니다.
 환경변수가 이미 설정되어 있으면 `.env`보다 우선합니다.
 진단 코드의 과거 대상 DB ID와 legacy의 과거 경로는 현행 앱 경로와 구분합니다.
+
+## 멘토 인사이트 추가 모듈
+
+- `mentoring/services/mentor_context.py`: 맥락 저장·검증·승인 항목 선택
+- `mentoring/services/mentor_insights.py`: 추출 지시, 근거·서비스 참조 검사, Notion 저장 포맷
+- `mentoring/web/context_routes.py`: 로컬 업무 맥락 GET/PUT/DELETE
+- `mentoring/web/templates/mentor_context.html`: 업무 맥락 편집 화면
+- `mentoring/web/static/mentor_context.js`, `mentor_context.css`: 입력·검토·저장 UI
+- `tests/test_mentor_insights.py`: 맥락·인사이트 오프라인 검증
 
 ## 이전 위치 → 현재 위치
 

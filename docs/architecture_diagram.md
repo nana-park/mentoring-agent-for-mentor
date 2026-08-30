@@ -24,6 +24,12 @@ flowchart TD
     GEMINI["Gemini"]
     NOTION["Notion CRM"]
 
+    WORK["내 업무 맥락: context_routes.py / mentor_context.py"]
+    REVIEW["근거·서비스 검사: services/mentor_insights.py"]
+    UI --> WORK
+    WORK -->|승인된 맥락만| AI
+    WORK -->|현재 승인 맥락| SUMMARY
+    AI --> REVIEW
     UI --> PROCESS
     UI -->|예약 설정| SCHEDULE
     SCHEDULE -->|예약 시 batch 명령| CLI
@@ -64,7 +70,9 @@ flowchart TD
 
 웹 직접 입력에는 여러 학생의 텍스트를 먼저 분리하고 검토하는 기능이 있습니다.
 자동 수집에서 여러 학생이 감지되거나 매칭에 실패하면 검토 큐에 보냅니다.
-회고록 생성은 별도 명령이며, 웹에서는 기존 로직대로 조회된 첫 강의를 사용합니다.
+멘토 인사이트는 대화 근거·업무 적용 가설을 구분하고 기존 Summary 속성에 상세 내용을 저장합니다.
+업무 맥락의 등록·승인과 인사이트 단계는 `mentor_insights.md`를 참고하세요.
+회고록 생성은 모든 인사이트 분류를 읽는 별도 명령이며, 웹에서는 기존 로직대로 조회된 첫 강의를 사용합니다.
 
 ## 예약과 프로세스
 

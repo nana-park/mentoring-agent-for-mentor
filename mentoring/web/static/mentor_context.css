@@ -1,0 +1,33 @@
+.context-nav { background: none; border: 0; cursor: pointer; font: inherit; }
+#context-view { width: 100%; text-align: left; }
+.context-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; }
+.context-panel { border: 1px solid #35383e; border-radius: 20px; background: #181a1e; padding: 26px; min-width: 0; }
+.context-panel h3 { font-size: 22px; color: #f0f4f8; margin: 10px 0; }
+.context-panel h4 { margin: 20px 0 10px; color: #e1e6eb; }
+.context-panel p, .context-panel li { font-size: 14px; line-height: 1.7; color: #b9c2cd; }
+.context-kicker { color: #9ddac4; letter-spacing: .09em; font-size: 11px; font-weight: 700; }
+.context-field { display: grid; gap: 8px; margin: 18px 0; color: #d9e2eb; font-size: 14px; }
+.context-panel input:not([type=checkbox]):not([type=file]), .context-panel textarea { box-sizing: border-box; width: 100%; border: 1px solid #4b5460; background: #101216; color: #f0f4f8; padding: 12px; border-radius: 9px; font: inherit; font-size: 14px; line-height: 1.6; }
+.context-panel textarea { resize: vertical; }
+.context-panel input:focus-visible, .context-panel textarea:focus-visible, .context-panel button:focus-visible { outline: 2px solid #a5e6cd; outline-offset: 3px; }
+.context-section-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.context-panel button { border: 1px solid #525d6b; background: #262d36; color: #e9f0f6; padding: 9px 12px; border-radius: 9px; font: inherit; font-size: 13px; cursor: pointer; }
+.context-panel button:hover { background: #354152; }
+.context-panel button:disabled { opacity: .45; cursor: wait; }
+.context-panel .context-primary { background: #a6e6cd; color: #10251f; border-color: #a6e6cd; font-weight: 700; }
+.context-card { padding: 16px; margin-top: 14px; border: 1px solid #39424e; border-radius: 12px; }
+.context-card .context-field:first-child { margin-top: 0; }
+.context-card-footer, .context-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-top: 16px; }
+.context-check { display: flex; align-items: flex-start; gap: 9px; color: #d5e0e8; font-size: 13px; line-height: 1.65; }
+.context-check input { margin-top: 4px; accent-color: #a6e6cd; flex-shrink: 0; }
+.context-notice { padding: 16px; margin: 22px 0; background: #222e32; border-radius: 12px; color: #c3eddf; }
+.context-notice p { margin-bottom: 0; font-size: 12px; }
+.context-guide ol { padding-left: 22px; }
+.context-file { display: grid; gap: 10px; font-size: 13px; color: #d5e0e8; margin: 20px 0 8px; }
+.context-file input { width: 100%; }
+.context-output-guide { margin-top: 22px; border-top: 1px solid #39424e; }
+#context-status { min-height: 24px; color: #a6e6cd; overflow-wrap: anywhere; }
+#context-status.error { color: #ffb8ac; }
+#context-preview { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 380px; overflow: auto; font-size: 12px; color: #c8d8d2; }
+.context-panel summary { cursor: pointer; color: #c8d8d2; font-size: 13px; }
+@media (max-width: 900px) { .context-grid { grid-template-columns: 1fr; } .context-panel { padding: 20px; } }

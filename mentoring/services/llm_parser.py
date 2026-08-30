@@ -3,6 +3,8 @@ import json
 from google import genai
 from google.genai import types
 from mentoring.models import ParsedMentoringSession
+from mentoring.services.mentor_context import approved_context
+from mentoring.services.mentor_insights import insight_instructions, validate_insights
 
 class LLMParser:
     def __init__(self):
@@ -82,6 +84,8 @@ class LLMParser:
         
         주어진 JSON 스키마에 맞게 세션 날짜, 요약, 과제, 멘토 인사이트 등을 추출하세요.
         """
+        mentor_context = approved_context()
+        prompt += insight_instructions(mentor_context)
         response = self.client.models.generate_content(
             model='gemini-2.5-pro',
             contents=prompt,
@@ -90,7 +94,9 @@ class LLMParser:
                 response_schema=ParsedMentoringSession,
             ),
         )
-        return ParsedMentoringSession.model_validate_json(response.text)
+        parsed = ParsedMentoringSession.model_validate_json(response.text)
+        parsed.mentorInsights = validate_insights(parsed.mentorInsights, source_text, mentor_context)
+        return parsed
 
     async def split_text_by_students(self, text: str) -> list[dict]:
         prompt = """
