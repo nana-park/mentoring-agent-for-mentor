@@ -5,5 +5,8 @@ db_config.json
 automation_config.json
 __pycache__/
 *.pyc
-inbox/
-archive/
+/inbox/
+/archive/
+.venv/
+runtime/
+.pytest_cache/

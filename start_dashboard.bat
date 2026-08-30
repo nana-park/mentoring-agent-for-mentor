@@ -1,15 +1,17 @@
 @echo off
 chcp 65001 >nul
+setlocal
 title Mentoring Agent Dashboard
-echo ===================================================
-echo Mentoring Agent Web Dashboard
-echo ===================================================
-echo.
-echo Starting local web server...
-echo Please do not close this window while using the dashboard.
-echo To access the dashboard, open your browser and go to:
-echo http://localhost:5000
-echo.
-cd /d "C:\Users\user\Documents\antigravity\mysterious-lavoisier\tools\mentoring"
-"C:\Users\able2\AppData\Local\Programs\Python\Python312\python.exe" app.py
+cd /d "%~dp0"
+echo Open http://localhost:5000 after the server starts.
+echo Keep this window open while using the dashboard.
+if defined MENTORING_PYTHON (
+    "%MENTORING_PYTHON%" app.py
+) else if exist ".venv\Scripts\python.exe" (
+    ".venv\Scripts\python.exe" app.py
+) else if exist "%LocalAppData%\Programs\Python\Python312\python.exe" (
+    "%LocalAppData%\Programs\Python\Python312\python.exe" app.py
+) else (
+    python app.py
+)
 pause

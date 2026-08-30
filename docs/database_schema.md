@@ -24,14 +24,14 @@
 | **1:1 멘토링 수** | `숫자 (Number)` | - | 예정된 총 멘토링 횟수 | 봇이 이 개수만큼 학생별 멘토링 회의록 빈칸(행)을 생성합니다 |
 
 ### 2. 🚨 Email Analysis Error Queue (통합 에러 보관함)
-어느 강의/학생인지 봇이 매칭하지 못했거나, 확신도가 낮아 처리에 실패한 원본 메일 보관 및 자가 치유(Self-Healing) 피드백 큐입니다. (독립된 페이지)
+어느 강의/학생인지 매칭하지 못한 입력 등을 보관하는 전역 검토 큐입니다. 아래 피드백 필드는 과거 복구 구현을 위한 항목도 포함합니다. `legacy/error_recovery.py`는 현재 자동 실행 흐름에 연결되어 있지 않습니다. 낮은 확신도는 현재 코드에서 강의별 ReviewQueue로 전달합니다.
 
 | 필드명 (속성 이름) | 속성 유형 (Type) | 포맷팅 (Format) | 설명 (Description) |
 | :--- | :--- | :--- | :--- |
 | **Mail Title** | `제목 (Title)` | - | 에러가 발생한 원본 메일 제목 |
 | **Error Reason** | `텍스트 (Text)` | - | 에러 사유 (예: `매칭 실패`, `확신도 낮음`) |
 | **Date** | `날짜 (Date)` | - | 에러 발생 일시 |
-| **Raw Email Text** | `텍스트 (Text)` | - | 원본 메일 본문 전체 (봇이 다시 읽거나 강사님이 확인할 수 있도록 보존) |
+| **Raw Email Text** | `텍스트 (Text)` | - | 원본 텍스트 앞부분 최대 2,000자 (현재 코드 제한) |
 | **Human Feedback** | `텍스트 (Text)` | - | 강사님이 봇에게 알려주는 힌트 (예: "이거 최소연 꺼야", "이건 2차 멘토링임") |
 | **Resolved Studnet Name** | `텍스트 (Text)` | - | 매칭된 학생 이름을 수동 기재할 때 사용하는 보조 텍스트 칸 |
 | **Error Fix Trial** | `체크박스 (Checkbox)` | - | 봇이 이 피드백을 기반으로 재시도(복구)를 수행했는지 여부 표시 |
@@ -63,7 +63,7 @@
 | **🧑‍🎓 Students (학생 CRM)** | `관계형 (Relation)` | - | `Students` DB와 연결 | 봇이 빈칸을 만들 때 학생을 자동으로 매핑합니다 |
 | **Session Date** | `날짜 (Date)` | `YYYY-MM-DD` | 세션 진행일 | 회의록 메일의 날짜를 추출하여 **자동 기입**합니다 |
 | **One Sentence** | `텍스트 (Text)` | 1~2문장 요약 | 전체 미팅 핵심 1줄 요약 | 봇이 `Meeting Summary` 내용을 압축하여 **자동 기입**합니다 |
-| **Meeting Summary** | `텍스트 (Text)` | `- 내용` (블릿포인트) | 주요 논의 내용 | 봇이 회의록을 요약하여 **자동 기입/누적**합니다 |
+| **Meeting Summary** | `텍스트 (Text)` | `- 내용` (블릿포인트) | 주요 논의 내용 | 봇이 회의록을 요약하여 **자동 기입**합니다 |
 | **Student to-do** | `텍스트 (Text)` | `- 내용` (블릿포인트) | 학생 다음 과제/할 일 | 봇이 회의록의 Action Items를 추출해 **자동 기입**합니다 |
 | **Raw Note** | `텍스트 (Text)` | 원문 그대로 | 원본 회의록 텍스트 | 봇이 파싱 전 이메일/회의록 원문을 **자동 기입**합니다 (2000자 제한) |
 
@@ -99,5 +99,34 @@
 | **Source Title** | `제목 (Title)` | `[학생명] 원본메일제목` 포맷 | 이메일의 메일 제목 |
 | **Source ID** | `텍스트 (Text)` | - | 이메일의 고유 메시지 ID (중복 방지용 숨은 값) |
 | **Type** | `선택 (Select)` | - | 데이터 출처 (Email, Local File 등) |
-| **Status** | `선택 (Select)` | - | 처리 상태 (Success, Needs Review, Failed 등) |
+| **Status** | `선택 (Select)` | - | 처리 상태 (Success, Review Required, Failed 등; 실제 기록 경로는 known_limitations.md 참고) |
 | **Processed At** | `날짜 (Date)` | - | 파이프라인이 데이터를 수집한 시간 |
+
+
+## 관계 개요
+
+다음 그림에서 강의와 하위 DB의 연결은 페이지 내부 포함 관계이고,
+학생·세션·과제·인사이트 사이의 연결은 Notion relation 속성입니다.
+
+```mermaid
+flowchart TD
+    COURSE["강의 일정의 강의 페이지"]
+    STUDENTS["Students"]
+    SESSIONS["Mentoring Sessions"]
+    ASSIGNMENTS["Assignments"]
+    INSIGHTS["Mentor Insights"]
+    HISTORY["Ingestion History"]
+    REVIEW["전역 검토 큐"]
+    COURSE -.->|내부 DB| STUDENTS
+    COURSE -.->|내부 DB| SESSIONS
+    COURSE -.->|내부 DB| ASSIGNMENTS
+    COURSE -.->|내부 DB| INSIGHTS
+    COURSE -.->|내부 DB| HISTORY
+    SESSIONS -->|학생 relation| STUDENTS
+    ASSIGNMENTS -->|학생 relation| STUDENTS
+    INSIGHTS -->|학생 relation| STUDENTS
+    INSIGHTS -->|세션 relation| SESSIONS
+```
+
+이 문서는 Notion의 필드 정의입니다. Python 폴더 구조는 `project_structure.md`, 처리 순서는
+`architecture_diagram.md`가 기준입니다. 실제 연결된 Notion DB를 이번 구조 정리에서 변경하지 않았습니다.
