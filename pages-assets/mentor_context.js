@@ -98,7 +98,7 @@
         finally { button.disabled = false; }
     });
     byId('context-delete').addEventListener('click', async () => {
-        if (!window.confirm('이 탭에 임시 저장한 데모 맥락을 삭제할까요?')) return;
+        if (!window.confirm('이 탭에 임시 저장한 맥락을 삭제할까요?')) return;
         try { render(await request('DELETE', {revision})); status('이 탭의 임시 맥락을 삭제했습니다.'); }
         catch (e) { status(e.message, true); }
     });

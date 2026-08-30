@@ -624,7 +624,7 @@
                             </div>
                         </div>
                         <div class="card-desc">
-                            메일 자동 수집 화면을 체험합니다. 실제 Gmail은 조회하지 않습니다.
+                            Gmail의 멘토링 메일과 Google Meet 회의록 자동 수집
                         </div>
                         <button class="run-btn" data-type="auto">
                             <span>Execute Auto</span><div class="spinner"></div>
@@ -653,7 +653,7 @@
                             </div>
                         </div>
                         <div class="card-desc">
-                            일괄 처리 예시를 봅니다. PC의 파일은 읽지 않습니다.
+                            폴더에 모아둔 회의록 텍스트 파일 일괄 처리
                         </div>
                         <button class="run-btn" data-type="batch">
                             <span>Execute Batch</span><div class="spinner"></div>
@@ -685,7 +685,7 @@
                             </div>
                         </div>
                         <div class="card-desc">
-                            가상의 텍스트로 입력 흐름을 체험합니다. AI 호출·DB 저장 없이 고정 예시를 표시합니다.
+                            회의록을 직접 입력하고 학생별 내용을 검토하는 작업 공간
                         </div>
                         <button class="run-btn">
                             <span>Open Editor</span>
@@ -711,7 +711,7 @@
                             </div>
                         </div>
                         <div class="card-desc">
-                            멘토 업무 적용 가설과 작은 실험의 고정 예시를 봅니다. 실제 회고록은 생성하지 않습니다.
+                            멘토링에서 발견한 인사이트와 서비스 적용 아이디어 정리
                         </div>
                         <button class="run-btn" data-type="summarize">
                             <span>Generate Report</span><div class="spinner"></div>
@@ -722,7 +722,7 @@
             </div> <!-- End steps-row -->
             <div class="workspace-section category-section">
     <div class="category-header">
-        <span class="category-title">MY WORKSPACE</span>
+        <span class="category-title">WORKSPACE SETTING</span>
         <div class="category-line"></div>
     </div>
 <section class="personal-settings" aria-labelledby="personal-settings-title">
@@ -816,7 +816,7 @@
                 <textarea id="context-goals" maxlength="3000" rows="3" placeholder="현재 담당 업무, 개선하고 싶은 경험, 검증할 가설을 적어주세요."></textarea>
             </label>
             <div class="context-section-title"><h4>담당 서비스</h4><button type="button" id="context-add-service">서비스 추가</button></div>
-            <p class="context-hint">데모에서는 가상의 서비스명과 사용자·AI 기능·문제를 적어주세요. 최대 8개.</p>
+            <p class="context-hint">서비스명과 사용자·AI 기능·해결할 문제를 정리하세요. 민감한 정보는 제외해주세요. 최대 8개.</p>
             <div id="context-services"></div>
             <div class="context-section-title"><h4>검토할 업무 메모</h4><button type="button" id="context-add-note">메모 추가</button></div>
             <p class="context-hint">ChatGPT에서 정리한 맥락이나 직접 쓴 업무 메모. 최신 사실인지 확인한 항목만 분석 사용을 체크하세요. 최대 12개.</p>
@@ -838,11 +838,11 @@
             </label>
             <p class="context-hint">파일은 브라우저에서 읽어 미저장 메모로 추가합니다. ChatGPT 전체 내보내기 ZIP·JSON은 받지 않습니다.</p>
             <div class="context-notice">
-                <strong>GitHub Pages 화면 데모</strong>
+                <strong>업무 맥락 저장 안내</strong>
                 <p>이 화면의 입력·저장은 현재 탭의 메모리에서만 동작합니다. 새로고침하면 모두 초기화됩니다.
-                AI 분석·ChatGPT 기록 연동·파일 저장·Notion 전송은 실행하지 않습니다. 가상의 정보로 체험해주세요.</p>
+                AI 분석·ChatGPT 기록 연동·파일 저장·Notion 전송은 실행하지 않습니다. 민감한 정보는 입력하지 마세요.</p>
             </div>
-            <label class="context-check"><input type="checkbox" id="context-enabled"> 데모 미리보기에 선택한 업무 맥락을 포함합니다 (전송 없음)</label>
+            <label class="context-check"><input type="checkbox" id="context-enabled"> 미리보기에 선택한 업무 맥락을 포함합니다 (전송 없음)</label>
             <div class="context-actions">
                 <button type="button" id="context-save" class="context-primary">맥락 저장</button>
                 <button type="button" id="context-reload">저장본 다시 불러오기</button>
@@ -927,7 +927,7 @@
                     <div class="step-circle" style="width: 28px; height: 28px; border-radius: 50%; background: #3f3f46; color: #a1a1aa; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; margin-bottom: 8px; border: 4px solid #1a1a1a; transition: all 0.3s ease;">2</div>
                     <div class="step-label" style="font-size: 12px; color: #a1a1aa; font-weight: 500; transition: color 0.3s ease;">Review & Execute</div>
                     <div class="step-desc" style="font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 6px; text-align: center; max-width: 85%; line-height: 1.3; transition: color 0.3s ease;">
-                        가상 예시를 검토하고 실행 흐름을 체험합니다.<br>데이터베이스에는 저장하지 않습니다.
+                        학생별 내용을 검토합니다.<br>외부 서비스 연결 전에는 예시 결과만 표시합니다.
                     </div>
                 </div>
             </div>
@@ -951,7 +951,7 @@
                     <!-- Student items injected here -->
                 </div>
                 <button class="run-btn" id="btn-execute-direct" onclick="executeDirectEntry()" style="margin-top: auto; flex-shrink: 0;">
-                    <span>데모 결과 보기 (Notion 저장 없음)</span>
+                    <span>결과 보기</span>
                     <div class="spinner" id="direct-execute-spinner"></div>
                 </button>
                 <button onclick="backToDirectStep1()" style="margin-top: 10px; flex-shrink: 0; background: transparent; border: 1px solid #3f3f46; color: white; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">
@@ -1106,7 +1106,7 @@
             if (view === 'home') { t.textContent = "Automated record-keeping workspace for mentors."; d.textContent = "Click on the mode you wish to execute."; }
             else if (view === 'context') { t.textContent = '내 업무 맥락'; d.textContent = '대화의 발견을 내 AI 서비스의 다음 실험으로 연결합니다.'; window.mentorContextUI.load(); }
             else if (view === 'history') { t.textContent = "Execution History"; d.textContent = "Recent results from the pipeline scans."; fetchHistory(); }
-            else if (view === 'docs') { t.textContent = "Documentation"; d.textContent = "아래 문서·다이어그램은 실제 로컬 앱의 구조입니다. 공개 데모는 외부 서비스에 연결하지 않습니다."; loadDoc('architecture_diagram.md', document.getElementById('btn-doc-arch')); }
+            else if (view === 'docs') { t.textContent = "Documentation"; d.textContent = "아래 문서·다이어그램은 실제 로컬 앱의 구조입니다. 현재 공개 화면은 외부 서비스에 연결하지 않습니다."; loadDoc('architecture_diagram.md', document.getElementById('btn-doc-arch')); }
         }
 
         async function fetchHistory() {
@@ -1245,7 +1245,7 @@
 
             term.textContent += '\n\n--------------------------------------------------\n';
             if (finalSuccess) {
-                term.textContent += '🎉 데모 체험이 완료되었습니다! 우측 상단의 [✕] 버튼을 눌러 창을 닫아주세요.\n';
+                term.textContent += '🎉 예시 확인이 완료되었습니다! 우측 상단의 [✕] 버튼을 눌러 창을 닫아주세요.\n';
             } else {
                 term.textContent += '⚠️ 작업이 종료되었습니다. 로그를 확인한 후 우측 상단의 [✕] 버튼을 눌러 창을 닫아주세요.\n';
             }
@@ -1293,7 +1293,7 @@
             try {
                 const res = await fetch(`/api/run/${type}`, { method: 'POST' });
                 await handleStream(res, term, btn, span, type,
-                    () => showToast(`✅ ${type} 데모 완료`),
+                    () => showToast(`✅ ${type} 예시 확인 완료`),
                     (err) => showToast(`❌ execution failed`, true)
                 );
             } catch (e) {
@@ -1460,7 +1460,7 @@
                     body: JSON.stringify({students: parsedStudentsGlobal})
                 });
                 await handleStream(res, term, btn, span, "direct",
-                    () => showToast(`✅ Direct Entry 데모 완료`),
+                    () => showToast(`✅ 입력 예시 확인 완료`),
                     (err) => showToast(`❌ Direct Entry Cancelled/Failed`, true)
                 );
             } catch (e) {
